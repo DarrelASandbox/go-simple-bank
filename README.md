@@ -31,8 +31,20 @@
     - Full support Postgres. MySQL is experimental
 
 ```sh
+# Login using u1
+psql simplebank -U u1
+# Check connection info
+\conninfo
+
 # In db folder
 sqlc generate
+```
+
+```sql
+-- Set idle session limit as superuser
+ALTER system SET idle_in_transaction_session_timeout='5min';
+-- Disable idle session limit as superuser
+ALTER system SET idle_in_transaction_session_timeout=0;
 ```
 
 &nbsp;
