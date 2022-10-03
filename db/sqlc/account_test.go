@@ -9,7 +9,7 @@ import (
 
 func TestCreateAccount(t *testing.T) {
 	arg := CreateAccountParams{
-		Owner:    "tom",
+		Owner:    "Tom",
 		Balance:  100,
 		Currency: "USD",
 	}
@@ -17,6 +17,7 @@ func TestCreateAccount(t *testing.T) {
 	account, err := testQueries.CreateAccount(context.Background(), arg)
 	// error from test:
 	// pq: insert or update on table "accounts" violates foreign key constraint "accounts_owner_fkey"
+	// fix: requires `Owner`: "Tom" to be in `users` table
 	require.NoError(t, err)
 	require.NotEmpty(t, account)
 
