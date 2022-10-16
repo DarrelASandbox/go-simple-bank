@@ -44,7 +44,7 @@ type TransferTxParams struct {
 	Amount        int64 `json:"amount"`
 }
 
-// contains the input parameters of the transfer transaction
+// result of the transfer transaction
 type TransferTxResult struct {
 	Transfer    Transfer `json:"transfer"`
 	FromAccount Account  `json:"from_account"`
@@ -79,8 +79,8 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 		}
 
 		result.ToEntry, err = q.CreateEntry(ctx, CreateEntryParams{
-			AccountID: arg.FromAccountID,
-			Amount:    -arg.Amount,
+			AccountID: arg.ToAccountID,
+			Amount:    arg.Amount,
 		})
 		if err != nil {
 			return err
