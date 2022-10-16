@@ -54,6 +54,7 @@ ALTER system SET idle_in_transaction_session_timeout=0;
 &nbsp;
 
 - **store_test.go: Logs for deadlock bug**
+- Refer to commit `45de7cb5a930e3bcdddae513d968b4943327983e`
 
 ```
 === RUN   TestTransferTx
