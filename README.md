@@ -101,6 +101,7 @@ ROLLBACK
 
 ```sql
 -- edited code snippets from link above
+-- see ShareLock under mode
 SELECT a.application_name,
        l.relation::regclass,
        l.transactionid,
@@ -113,6 +114,36 @@ SELECT a.application_name,
 FROM pg_stat_activity a
 JOIN pg_locks l ON l.pid = a.pid
 ORDER BY a.pid;
+```
+
+&nbsp;
+
+---
+
+&nbsp;
+
+- Run the 4 queries in the order below to simulate deadlock
+
+```sql
+-- Tx1: transfer $10 from account 1 to account 2
+BEGIN;
+
+-- 1
+UPDATE accounts SET balance = balance - 10 WHERE id = 1 RETURNING *;
+-- 3
+UPDATE accounts SET balance = balance - 10 WHERE id = 2 RETURNING *;
+
+ROLLBACK;
+
+-- Tx2: transfer $10 from account 2 to account 1
+BEGIN;
+
+-- 2
+UPDATE accounts SET balance = balance - 10 WHERE id = 2 RETURNING *;
+-- 4
+UPDATE accounts SET balance = balance - 10 WHERE id = 1 RETURNING *;
+
+ROLLBACK;
 ```
 
 &nbsp;
