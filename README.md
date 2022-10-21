@@ -53,6 +53,8 @@ ALTER system SET idle_in_transaction_session_timeout=0;
 
 &nbsp;
 
+## Deadlock
+
 - **store_test.go: Logs for deadlock bug**
 - Refer to commit `45de7cb5a930e3bcdddae513d968b4943327983e`
 
@@ -145,6 +147,42 @@ UPDATE accounts SET balance = balance - 10 WHERE id = 1 RETURNING *;
 
 ROLLBACK;
 ```
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## Transaction Isolation Level
+
+- **Read Phenomena**
+  - **Dirty Read:** A transaction reads data written by other concurrent uncommitted transaction
+  - **Non-Repeatable Read:** A transaction reads the same row twice and sees different value because it has been modified by other **committed** transaction
+  - **Phantom Read:** A transaction re-executes a query to **find rows** that satisfy a condition and sees a **different set** of rows, due to changes by other **committed** transaction
+  - **Serialization Anomaly:** The result of a **group** of concurrent **committed transactions** is **impossible to achieve** if we try to run them **sequentially** in any order without overlapping
+- **4 Standard Isolation Levels**
+  - **Read Uncommitted:** Can see data written by uncommitted transaction
+  - **Read Committed:** Only see data written by committed transaction
+  - **Repeatable Read:** Same read query always returns same result
+  - **Serializable:** Can achieve same result if execute transactions serially in some order instead of concurrently
+
+|                       | Read Uncommitted | Read Committed | Repeatable Read | Serializable |
+| :-------------------: | :--------------: | :------------: | :-------------: | :----------: |
+|      Dirty Read       |        ✅        |       ❌       |       ❌        |      ❌      |
+|  Non-Repeatable Read  |        ✅        |       ✅       |       ❌        |      ❌      |
+|     Phantom Read      |        ✅        |       ✅       |       ❌        |      ❌      |
+| Serialization Anomaly |        ✅        |       ✅       |       ✅        |      ❌      |
+
+|       MySQL        |        Postgres        |
+| :----------------: | :--------------------: |
+| 4 Isolation Levels |   3 Isolation Levels   |
+| Locking Mechanism  | Dependencies Detection |
+|  Repeatable Read   |     Read Committed     |
+
+- High Level Isolation Methods
+  - Retry Mechanism: There might be errors, timeout or deadlock
+  - Read documentation: Each database engine might implement isolation level differently
 
 &nbsp;
 
