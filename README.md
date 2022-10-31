@@ -31,8 +31,8 @@
     - Full support Postgres. MySQL is experimental
 
 ```sh
-# Login using u1
-psql simplebank -U u1
+# Login using root
+psql simplebank -U root
 # Check connection info
 \conninfo
 
