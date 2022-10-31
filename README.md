@@ -192,9 +192,11 @@ ROLLBACK;
 
 ## GitHub Actions
 
-- [GitHub - Creating PostgreSQL service containers](https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers)
-
 1. Actions -> Configure in Go -> Copy code to vscode
+2. [GitHub - Creating PostgreSQL service containers](https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers)
+3. [GitHub - migrate CLI usage](https://github.com/golang-migrate/migrate#cli-usage)
+4. [GitHub - migrate releases](https://github.com/golang-migrate/migrate/releases)
+   1. [migrate.linux-amd64.tar.gz](https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migrate.linux-amd64.tar.gz)
 
 &nbsp;
 
