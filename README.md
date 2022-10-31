@@ -189,3 +189,13 @@ ROLLBACK;
 ---
 
 &nbsp;
+
+## GitHub Actions
+
+1. Actions -> Configure in Go -> Copy code to vscode
+
+&nbsp;
+
+---
+
+&nbsp;
