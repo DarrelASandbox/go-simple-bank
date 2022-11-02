@@ -203,3 +203,19 @@ ROLLBACK;
 ---
 
 &nbsp;
+
+## mockgen
+
+- [Go Package - gomock](https://pkg.go.dev/github.com/golang/mock/gomock)
+
+```sh
+# Go 1.16+
+go install github.com/golang/mock/mockgen@v1.6.0
+mockgen -build_flags=--mod=mod -package mockdb -destination db/mock/store.go github.com/DarrelASandbox/go-simple-bank/db/sqlc Store
+```
+
+&nbsp;
+
+---
+
+&nbsp;
