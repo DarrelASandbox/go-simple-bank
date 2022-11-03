@@ -219,3 +219,17 @@ mockgen -build_flags=--mod=mod -package mockdb -destination db/mock/store.go git
 ---
 
 &nbsp;
+
+## Migration
+
+- [Go Package - migrate: CLI](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate)
+
+```sh
+migrate create -ext sql -dir db/migration -seq add_users
+```
+
+&nbsp;
+
+---
+
+&nbsp;

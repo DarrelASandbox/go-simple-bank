@@ -11,46 +11,16 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func createRandomUser(t *testing.T, owner string) User {
-	hashedPassword, err := util.HashPassword(util.RandomString(6))
-	require.NoError(t, err)
-
-	arg := CreateUserParams{
-		Username:       owner,
-		HashedPassword: hashedPassword,
-		FullName:       util.RandomOwner(),
-		Email:          util.RandomEmail(),
-	}
-
-	user, err := testQueries.CreateUser(context.Background(), arg)
-	require.NoError(t, err)
-	require.NotEmpty(t, user)
-
-	require.Equal(t, arg.Username, user.Username)
-	require.Equal(t, arg.HashedPassword, user.HashedPassword)
-	require.Equal(t, arg.FullName, user.FullName)
-	require.Equal(t, arg.Email, user.Email)
-	require.True(t, user.PasswordChangedAt.IsZero())
-	require.NotZero(t, user.CreatedAt)
-
-	return user
-}
-
 func createRandomAccount(t *testing.T) Account {
-
-	owner := util.RandomOwner()
-	createRandomUser(t, owner)
+	user := createRandomUser(t)
 
 	arg := CreateAccountParams{
-		Owner:    owner,
+		Owner:    user.Username,
 		Balance:  util.RandomMoney(),
 		Currency: util.RandomCurrency(),
 	}
 
 	account, err := testQueries.CreateAccount(context.Background(), arg)
-	// error from test:
-	// pq: insert or update on table "accounts" violates foreign key constraint "accounts_owner_fkey"
-	// fix: requires `Owner`: "Tom" to be in `users` table
 	require.NoError(t, err)
 	require.NotEmpty(t, account)
 
