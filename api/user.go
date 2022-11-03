@@ -33,8 +33,8 @@ func (server *Server) createUser(ctx *gin.Context) {
 	}
 
 	// TestCreateUserAPI should fail but did not
-	hashedPassword, err := util.HashPassword("xyz")
-	// hashedPassword, err := util.HashPassword(req.Password)
+	// hashedPassword, err := util.HashPassword("xyz")
+	hashedPassword, err := util.HashPassword(req.Password)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return

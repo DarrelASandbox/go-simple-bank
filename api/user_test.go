@@ -19,6 +19,8 @@ import (
 
 func TestCreateUserAPI(t *testing.T) {
 	user, password := randomUser(t)
+	hashedPassword, err := util.HashPassword(password)
+	require.NoError(t, err)
 
 	testCases := []struct {
 		name          string
@@ -35,8 +37,15 @@ func TestCreateUserAPI(t *testing.T) {
 				"email":     user.Email,
 			},
 			buildStubs: func(store *mockdb.MockStore) {
+				arg := db.CreateUserParams{
+					Username:       user.Username,
+					HashedPassword: hashedPassword,
+					FullName:       user.FullName,
+					Email:          user.Email,
+				}
+
 				store.EXPECT().
-					CreateUser(gomock.Any(), gomock.Any()).
+					CreateUser(gomock.Any(), gomock.Eq(arg)).
 					Times(1).
 					Return(user, nil)
 			},
