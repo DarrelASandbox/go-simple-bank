@@ -233,3 +233,18 @@ migrate create -ext sql -dir db/migration -seq add_users
 ---
 
 &nbsp;
+
+## PASETO
+
+- Platform-Agnostic Security Tokens
+- Only 2 most recent PASTO versions are accepted
+- **Non-trivial Forgery**
+  - No more "alg" header or "none" algorithm
+  - Everything is authenticated
+  - Encrypted payload for local use &lt;symmetric key&gt;
+
+&nbsp;
+
+---
+
+&nbsp;
