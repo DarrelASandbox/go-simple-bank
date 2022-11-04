@@ -2,7 +2,9 @@ name: Deploy to production
 
 on:
   push:
-    branches: ['main']
+    # branches: ['main']
+    tags:
+      - v999.**
 
 jobs:
   build:

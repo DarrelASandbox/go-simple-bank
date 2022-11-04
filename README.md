@@ -270,7 +270,7 @@ chmod +x wait-for.sh
 
 &nbsp;
 
-# AWS ECR with GitHub Actions
+## AWS ECR with GitHub Actions
 
 1. AWS ECR -> Create repository for URI
 2. Instead of using the commands given by AWS (View push commands), we will use GitHub Actions
@@ -305,6 +305,44 @@ chmod +x wait-for.sh
   with:
     role-to-assume: arn:aws:iam::123456789012:role/my-github-actions-role
 ```
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## AWS RDS
+
+1. AWS RDS -> Create database
+2. **Choose a database creation method:** Standard create
+3. **Engine options:** PostgreSQL
+4. **DB instance identifier:** simplebank
+5. **Master username:** root
+6. Check **Auto generate a password**
+7. **DB instance class:** db.t2.micro
+8. Uncheck **Storage autoscaling**
+9. Use Default VPC for **Connectivity**
+10. **Public access:** Yes
+11. **VPC security group:**
+    1. Create new
+    2. **New VPC security group name:** access-postgres-anywhere
+12. **Database authentication:** Password authentication
+13. **Initial database name:** simplebank
+14. Create database
+15. View credential details
+16. Register new Server/Connection for PostgreSQL
+    1. **Name:** AWS Postgres
+    2. **Host:** From AWS connection details endpoint _(See point 19)_
+    3. **Username:** root
+    4. **Password:** From AWS RDS credential details
+    5. **Database:** simplebank
+17. Check VPC Security Groups from AWS RDS
+18. Via the Security group ID -> Edit inbound rules
+    1. **Source:** Anywhere _(Unless ip is static)_
+    2. Save rules
+19. View connection details from AWS RDS -> Copy Endpoint
+20. Update `Makefile` postgres url
 
 &nbsp;
 
