@@ -349,3 +349,38 @@ chmod +x wait-for.sh
 ---
 
 &nbsp;
+
+## AWS Secrets Manager
+
+```sh
+# Generate a 32 characters string
+openssl rand -hex 64 | head -c 32
+```
+
+1. AWS Secrets Manager -> Store a new secret
+2. Other type of secrets
+   1. **DB_DRIVER:** postgres
+   2. **DB_SOURCE:** _Use AWS credentials for the postgres connection_
+   3. **SERVER_ADDRESS:** 0.0.0.0:4000
+   4. **TOKEN_SYMMETRIC_KEY:** _Generate a 32 characters string_
+   5. **ACCESS_TOKEN_DURATION:** 15m
+3. Next -> **Secret name:** simplebank -> Next -> Next -> Store
+4. [Install AWS CLI](https://aws.amazon.com/cli/)
+   1. `aws configure` _(Refer to IAM profile)_
+   2. `ls -l ~/.aws`
+   3. `cat ~/.aws/credentials`
+   4. `aws secretsmanager help`
+   5. `aws secretsmanager get-secret-value --secret-id simplebank` _Might want to try with arn as well_
+   6. AWS IAM User groups -> Permissions -> Add permissions -> **Attach Policies:** SecretsManagerReadWrite
+   7. `aws secretsmanager get-secret-value --secret-id simplebank --query SecretString --output text`
+5. `brew install jq` (To output into json format)
+   1. `aws secretsmanager get-secret-value --secret-id simplebank --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > app.env`
+      1. [jq - String interpolation](<https://stedolan.github.io/jq/manual/#Stringinterpolation-(foo)>)
+      2. [jq - Array/Object Value Iterator](https://stedolan.github.io/jq/manual/#Array/ObjectValueIterator:.[])
+      3. [jq - Invoking jq (`--raw-output / -r`)](https://stedolan.github.io/jq/manual/#Invokingjq)
+
+&nbsp;
+
+---
+
+&nbsp;
