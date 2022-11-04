@@ -253,6 +253,11 @@ migrate create -ext sql -dir db/migration -seq add_users
 
 ```sh
 docker build -t simplebank:latest .
+docker run --name simplebank -p 4000:4000 -e GIN_MODE=release simplebank:latest
+docker compose up
+
+# Make script executable
+chmod +x start.sh
 ```
 
 &nbsp;
