@@ -23,8 +23,8 @@ INSERT INTO users (
 
 type CreateUserParams struct {
 	Username       string `json:"username"`
-	HashedPassword string `json:"hashedPassword"`
-	FullName       string `json:"fullName"`
+	HashedPassword string `json:"hashed_password"`
+	FullName       string `json:"full_name"`
 	Email          string `json:"email"`
 }
 
@@ -79,9 +79,9 @@ RETURNING username, hashed_password, full_name, email, password_changed_at, crea
 `
 
 type UpdateUserParams struct {
-	HashedPassword    sql.NullString `json:"hashedPassword"`
-	PasswordChangedAt sql.NullTime   `json:"passwordChangedAt"`
-	FullName          sql.NullString `json:"fullName"`
+	HashedPassword    sql.NullString `json:"hashed_password"`
+	PasswordChangedAt sql.NullTime   `json:"password_changed_at"`
+	FullName          sql.NullString `json:"full_name"`
 	Email             sql.NullString `json:"email"`
 	Username          string         `json:"username"`
 }
