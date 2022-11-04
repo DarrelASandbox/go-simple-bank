@@ -248,3 +248,15 @@ migrate create -ext sql -dir db/migration -seq add_users
 ---
 
 &nbsp;
+
+## Docker
+
+```sh
+docker build -t simplebank:latest .
+```
+
+&nbsp;
+
+---
+
+&nbsp;
