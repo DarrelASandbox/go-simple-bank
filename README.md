@@ -269,3 +269,45 @@ chmod +x wait-for.sh
 ---
 
 &nbsp;
+
+# AWS ECR with GitHub Actions
+
+1. AWS ECR -> Create repository for URI
+2. Instead of using the commands given by AWS (View push commands), we will use GitHub Actions
+3. [GitHub Marketplace Actions](https://github.com/marketplace?category=&query=&type=actions&verification=)
+   1. Search for `ECR`
+   2. Refer to `deploy.yml` file
+4. AWS IAM -> Add user
+   1. **User name:** github-ci
+   2. **Access type:** Programmatic access
+5. Next -> Create group
+   1. **Group name:** deployment
+   2. **Filter policies:** elastic container registry
+   3. Check AmazonEC2ContainerRegistryFullAccess -> Create group -> Next -> Review
+6. GitHub simplebank repo Settings -> Secrets -> New repository secret
+   1. Refer to the code snippets below
+   2. **Name:** `AWS_ACCESS_KEY_ID`
+   3. **Value:** `AWS Access Key ID`
+   4. **Name:** `AWS_SECRET_ACCESS_KEY`
+   5. **Value:** `AWS Secret access key`
+
+```yml
+# From tutorial video
+- name: Configure AWS credentials
+  uses: aws-actions/configure-aws-credentials@v1
+  with:
+    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY }}
+
+# From deploy.yml
+- name: Configure AWS credentials
+  uses: aws-actions/configure-aws-credentials@v1
+  with:
+    role-to-assume: arn:aws:iam::123456789012:role/my-github-actions-role
+```
+
+&nbsp;
+
+---
+
+&nbsp;
