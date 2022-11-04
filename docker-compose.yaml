@@ -16,3 +16,9 @@ services:
       - DB_SOURCE=postgresql://root:secret@postgres:5432/simplebank?sslmode=disable
     depends_on:
       - postgres
+
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#entrypoint
+    # Setting `entrypoint` both overrides any default entrypoint set on the service’s image with the `ENTRYPOINT` Dockerfile instruction,
+    # and clears out any default command on the image - meaning that if there’s a `CMD` instruction in the Dockerfile, it is ignored.
+    entrypoint: ['/app/wait-for.sh', 'postgres:5432', '--', '/app/start.sh']
+    command: ['/app/main']

@@ -251,6 +251,9 @@ migrate create -ext sql -dir db/migration -seq add_users
 
 ## Docker
 
+- [sh-compatible wait-for](https://github.com/Eficode/wait-for)
+  - Download from release and place it in root folder (`wait-for.sh`)
+
 ```sh
 docker build -t simplebank:latest .
 docker run --name simplebank -p 4000:4000 -e GIN_MODE=release simplebank:latest
@@ -258,6 +261,7 @@ docker compose up
 
 # Make script executable
 chmod +x start.sh
+chmod +x wait-for.sh
 ```
 
 &nbsp;
