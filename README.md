@@ -1,3 +1,24 @@
+<details>
+  <summary>Table of Contents</summary>
+  <ul>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#sql">SQL</a></li>
+    <li><a href="#deadlock">Deadlock</a></li>
+    <li><a href="#transaction-isolation-level">Transaction Isolation Level</a></li>
+    <li><a href="#github-actions">GitHub Actions</a></li>
+    <li><a href="#mockgen">mockgen</a></li>
+    <li><a href="#migration">Migration</a></li>
+    <li><a href="#paseto">PASETO</a></li>
+    <li><a href="#docker">Docker</a></li>
+    <li><a href="#aws-ecr-with-github-actions">AWS ECR with GitHub Actions</a></li>
+    <li><a href="#aws-rds">AWS RDS</a></li>
+    <li><a href="#aws-secrets-manager">AWS Secrets Manager</a></li>
+    <li><a href="#aws-eks">AWS EKS</a></li>
+  </ul>
+</details>
+
+&nbsp;
+
 ## About The Project
 
 - Backend Master Class [Golang + Postgres + Kubernetes + gRPC]
@@ -11,7 +32,7 @@
 
 &nbsp;
 
-## Notes
+## SQL
 
 - [dbdiagram.io](https://dbdiagram.io/home)
 - **CRUD**
@@ -382,6 +403,42 @@ openssl rand -hex 64 | head -c 32
    1. [AWS CLI Command Reference: get-login-password](https://docs.aws.amazon.com/cli/latest/reference/ecr/get-login-password.html)
    2. `aws ecr get-login-password | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com`
    3. `docker pull <AWS ECR Image URI>`
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## AWS EKS
+
+1. AWS EKS -> clusters -> Create cluster
+   1. **Name:** simplebank
+   2. **Kubernetes version:** 1.20
+   3. **Cluster Service Role:** AWSEKSClusterRole
+      1. AWS IAM -> Create role -> `EKS - Cluster` use case -> Next (`AmazonEKSClusterPolicy`) -> Next
+      2. **Role name:** AWSEKSClusterRole
+2. Next -> Use default VPC
+3. **Cluster endpoint access:** Public and private
+4. **Amazon VPC CNI Version:** `v1.8.0-eksbuild. 1`
+5. Next -> Next -> Create -> Refresh later when cluster is created
+6. Add Node Group
+   1. **Name:** simplebank
+   2. **Node IAM Role:** AWSEKSNodeRole
+      1. AWS IAM -> Create role -> `EC2` use case -> Next
+      2. Pick `AmazonEKS_CNI_Policy` & `AmazonEKSWorkerNodePolicy` & `AmazonEC2ContainerRegistryReadOnly` -> Next
+      3. **Role name:** AWSEKSNodeRole
+   3. Next
+   4. **AMI type:** Amazon Linux 2 (AL2_x86_64)
+   5. **Capacity type:** On-Demand
+   6. **Instance types:** t3.micro
+   7. **Disk size:** 10 GiB
+   8. **Node Group scaling configuration**
+      1. **Minimum size:** 1 nodes
+      2. **Maximum size:** 2 nodes
+      3. **Desired size:** 1 nodes
+   9. Next -> Disable **Allow remote access to nodes** -> Next -> Create
+   10. Refresh later when node is created
 
 &nbsp;
 
