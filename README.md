@@ -14,6 +14,7 @@
     <li><a href="#aws-rds">AWS RDS</a></li>
     <li><a href="#aws-secrets-manager">AWS Secrets Manager</a></li>
     <li><a href="#aws-eks">AWS EKS</a></li>
+    <li><a href="#kubectl--k9s">kubectl & k9s</a></li>
   </ul>
 </details>
 
@@ -439,6 +440,36 @@ openssl rand -hex 64 | head -c 32
       3. **Desired size:** 1 nodes
    9. Next -> Disable **Allow remote access to nodes** -> Next -> Create
    10. Refresh later when node is created
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## kubectl & k9s
+
+1. [Command line tool (kubectl)](https://kubernetes.io/docs/reference/kubectl/)
+2. `kubectl cluster-info`
+3. AWS IAM -> Users -> Groups -> Pick `deployment` group that was created before
+4. Permissions -> Add permissions -> Create inline policy
+   1. **Service:** EKS
+   2. **Actions:** All EKS actions
+   3. **Resources:** All resources
+5. Review policy
+6. **Name:** EKSFullAccess
+7. Create policy
+8. `aws eks update-kubeconfig --name simplebank --region us-east-1`
+9. `ls -l ~/.kube`
+10. **Switch between clusters:** `kubectl config use-context arn:aws:eks:ap-southeast-1:560476749134:cluster/dep-aws-eks`
+11. [How do I provide access to other IAM users and roles after cluster creation in Amazon EKS?](https://aws.amazon.com/premiumsupport/knowledge-center/amazon-eks-cluster-access/)
+    1. AWS Profile -> My Security Credentials -> Access Keys (access key ID and secret access key) -> Create New Access Key
+    2. `vi ~/.aws/credentials` to add the new credentials
+    3. `export AWS_PROFILE=github` or `export AWS_PROFILE=default`
+    4. Input User ARN from AWS IAM Users into `aws-auth.yaml`
+    5. `kubectl apply -f eks/aws-auth.yaml`
+12. [k9s](https://k9scli.io/)
+    1. [Commands](https://k9scli.io/topics/commands/)
 
 &nbsp;
 
