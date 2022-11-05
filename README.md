@@ -378,6 +378,10 @@ openssl rand -hex 64 | head -c 32
       1. [jq - String interpolation](<https://stedolan.github.io/jq/manual/#Stringinterpolation-(foo)>)
       2. [jq - Array/Object Value Iterator](https://stedolan.github.io/jq/manual/#Array/ObjectValueIterator:.[])
       3. [jq - Invoking jq (`--raw-output / -r`)](https://stedolan.github.io/jq/manual/#Invokingjq)
+6. After GitHub Actions are completed, check AWS ECR for the newly built image
+   1. [AWS CLI Command Reference: get-login-password](https://docs.aws.amazon.com/cli/latest/reference/ecr/get-login-password.html)
+   2. `aws ecr get-login-password | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com`
+   3. `docker pull <AWS ECR Image URI>`
 
 &nbsp;
 
