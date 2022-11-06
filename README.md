@@ -15,6 +15,7 @@
     <li><a href="#aws-secrets-manager">AWS Secrets Manager</a></li>
     <li><a href="#aws-eks">AWS EKS</a></li>
     <li><a href="#kubectl--k9s">kubectl & k9s</a></li>
+    <li><a href="#k8s-with-aws-eks">k8s with AWS EKS</a></li>
   </ul>
 </details>
 
@@ -429,17 +430,17 @@ openssl rand -hex 64 | head -c 32
       1. AWS IAM -> Create role -> `EC2` use case -> Next
       2. Pick `AmazonEKS_CNI_Policy` & `AmazonEKSWorkerNodePolicy` & `AmazonEC2ContainerRegistryReadOnly` -> Next
       3. **Role name:** AWSEKSNodeRole
-   3. Next
-   4. **AMI type:** Amazon Linux 2 (AL2_x86_64)
-   5. **Capacity type:** On-Demand
-   6. **Instance types:** t3.micro
-   7. **Disk size:** 10 GiB
-   8. **Node Group scaling configuration**
-      1. **Minimum size:** 1 nodes
-      2. **Maximum size:** 2 nodes
-      3. **Desired size:** 1 nodes
-   9. Next -> Disable **Allow remote access to nodes** -> Next -> Create
-   10. Refresh later when node is created
+      4. Next
+      5. **AMI type:** Amazon Linux 2 (AL2_x86_64)
+      6. **Capacity type:** On-Demand
+      7. **Instance types:** t3.small
+      8. **Disk size:** 10 GiB
+      9. **Node Group scaling configuration**
+         1. **Minimum size:** 1 nodes
+         2. **Maximum size:** 2 nodes
+         3. **Desired size:** 1 nodes
+      10. Next -> Disable **Allow remote access to nodes** -> Next -> Create
+7. Refresh later when node is created
 
 &nbsp;
 
@@ -470,6 +471,40 @@ openssl rand -hex 64 | head -c 32
     5. `kubectl apply -f eks/aws-auth.yaml`
 12. [k9s](https://k9scli.io/)
     1. [Commands](https://k9scli.io/topics/commands/)
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## k8s with AWS EKS
+
+1. [Kubernetes Documentation - Concepts - Workloads - Workload Resources - Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+2. `kubectl apply -f eks/deployment.yaml`
+3. AWS EKS -> Clusters -> Compute -> `simplebank` Node Group -> Autoscaling group name -> Edit group details
+   1. **Desired capacity:** 1
+   2. Update -> Activity -> Refresh
+   3. **The points below are for switching instance type:**
+      1. [AWS EC2 - IP addresses per network interface per instance type: t3.micro](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html)
+      2. Edit -> Edit Node Group: simplebank page -> **Cannot change eni**
+      3. So we must **delete** node group
+      4. Add Node Group
+      5. **Name:** simplebank
+      6. **Role name:** AWSEKSNodeRole
+      7. Next
+      8. **AMI type:** Amazon Linux 2 (AL2_x86_64)
+      9. **Capacity type:** On-Demand
+      10. **Instance types:** t3.small
+      11. **Disk size:** 10 GiB
+      12. **Node Group scaling configuration**
+          1. **Minimum size:** 0 nodes
+          2. **Maximum size:** 2 nodes
+          3. **Desired size:** 1 nodes
+      13. Next -> Next -> Create
+4. [Kubernetes Documentation - Concepts - Services - Load Balancing, and Networking - Service](https://kubernetes.io/docs/concepts/services-networking/service/)
+5. `kubectl apply -f eks/service.yaml`
+6. [Linux nslookup command](https://www.computerhope.com/unix/unslooku.htm)
 
 &nbsp;
 
