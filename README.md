@@ -16,6 +16,7 @@
     <li><a href="#aws-eks">AWS EKS</a></li>
     <li><a href="#kubectl--k9s">kubectl & k9s</a></li>
     <li><a href="#k8s-with-aws-eks">k8s with AWS EKS</a></li>
+    <li><a href="#aws-route-53">AWS Route 53</a></li>
   </ul>
 </details>
 
@@ -505,6 +506,53 @@ openssl rand -hex 64 | head -c 32
 4. [Kubernetes Documentation - Concepts - Services - Load Balancing, and Networking - Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 5. `kubectl apply -f eks/service.yaml`
 6. [Linux nslookup command](https://www.computerhope.com/unix/unslooku.htm)
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## AWS route 53
+
+1. [Amazon Route 53 pricing](https://aws.amazon.com/route53/pricing/)
+2. AWS Route 53 -> Register domain (e.g. simple-bank.org) -> Check -> Continue
+3. Fill in **Registrant Contact** form -> Continue -> Email Verification
+4. Automatically Renew Domain -> Terms and Conditions -> Complete Order
+5. Enable Transfer lock (Confirm in Registered domains page)
+6. Hosted zones -> domain name
+   1. **Name Server (NS) record**
+   2. **Start of Authority (SOA) record**
+7. Create record:
+   1. **Record Name:** api.domain-name.com
+   2. **Record Type:** Address (A) Record
+   3. **Value:** Check `Alias`
+      1. Alias to Network Load Balancer
+      2. **Region of Load Balancer:** us-east-1
+      3. **URL of Load Balancer from API Service**
+8. `nslookup api.simple-bank.org`
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## k8s Ingress
+
+- [Kubernetes Documentation - Concepts - Services, Load Balancing, and Networking - Ingress #hostname-wildcards](https://kubernetes.io/docs/concepts/services-networking/ingress/#hostname-wildcards)
+- [Kubernetes Documentation - Concepts - Services, Load Balancing, and Networking - Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+- [Ingress NGINX Controller](https://github.com/kubernetes/ingress-nginx/blob/main/README.md#readme)
+- [Kubernetes Documentation - Concepts - Services, Load Balancing, and Networking - Ingress #ingress-class](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class)
+
+1. `kubectl apply -f eks/service.yaml` (Change from LoadBalancer to ClusterIP because we do not want to expose it outside world)
+2. `kubectl apply -f eks/ingress.yaml`
+3. `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/aws/deploy.yaml`
+4. Copy `ingress-nginx` namespace's address from k9s -> AWS Route 53 Hosted zones page -> Check `api.simple-bank.org` Record name -> Edit record
+   1. Replace the URL of Load Balancer with the copied address
+   2. Save
+5. `nslookup api.simple-bank.org`
+6. `kubectl apply -f eks/ingress.yaml` (Apply #ingress-class settings)
 
 &nbsp;
 
