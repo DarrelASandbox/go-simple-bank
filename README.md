@@ -18,7 +18,8 @@
     <li><a href="#k8s-with-aws-eks">k8s with AWS EKS</a></li>
     <li><a href="#aws-route-53">AWS Route 53</a></li>
     <li><a href="#k8s-ingress">k8s Ingress</a></li>
-    <li><a href="#k8s cert-manager">k8s cert-manager</a></li>
+    <li><a href="#k8s-cert-manager--lets-encrypt">k8s cert-manager & Let's Encrypt</a></li>
+    <li><a href="#k8s-with-github-actions">k8s with GitHub Actions</a></li>
   </ul>
 </details>
 
@@ -562,7 +563,7 @@ openssl rand -hex 64 | head -c 32
 
 &nbsp;
 
-## k8s cert-manager
+## k8s cert-manager & Let's Encrypt
 
 - [Kubernetes Documentation - Concepts - Services, Load Balancing, and Networking - Ingress #tls](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
 - [cert-manager](https://cert-manager.io/docs/)
@@ -576,6 +577,17 @@ openssl rand -hex 64 | head -c 32
 - Search for `certificates` in k9s
 - Check `all+` namespace then search for `ingress`
 - Describe simple-bank-ingress
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## k8s with GitHub Actions
+
+- [GitHub Marketplace - Kubectl tool installer](https://github.com/marketplace/actions/kubectl-tool-installer)
+  - Find latest version using this URL: `storage.googleapis.com/kubernetes-release/release/stable.txt`
 
 &nbsp;
 

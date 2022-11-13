@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
         - name: simplebank-api
-          image: AWS ECR Image URI
+          image: AWS ECR Image URI # Use latest tag
+          imagePullPolicy: Always
           ports:
             - containerPort: 4000
