@@ -17,6 +17,8 @@
     <li><a href="#kubectl--k9s">kubectl & k9s</a></li>
     <li><a href="#k8s-with-aws-eks">k8s with AWS EKS</a></li>
     <li><a href="#aws-route-53">AWS Route 53</a></li>
+    <li><a href="#k8s-ingress">k8s Ingress</a></li>
+    <li><a href="#k8s cert-manager">k8s cert-manager</a></li>
   </ul>
 </details>
 
@@ -553,6 +555,27 @@ openssl rand -hex 64 | head -c 32
    2. Save
 5. `nslookup api.simple-bank.org`
 6. `kubectl apply -f eks/ingress.yaml` (Apply #ingress-class settings)
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## k8s cert-manager
+
+- [Kubernetes Documentation - Concepts - Services, Load Balancing, and Networking - Ingress #tls](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
+- [cert-manager](https://cert-manager.io/docs/)
+- [Let's Encrypt](https://letsencrypt.org/docs/)
+- [cert-manager - Automated Certificate Management Environment (ACME)](https://cert-manager.io/docs/configuration/acme/)
+- `kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml`
+- Check `cert-manager` namespace
+- `kubectl apply -f eks/issuer.yaml`
+- Search for `clusterissuer` in k9s
+- Search for `secrets` in k9s
+- Search for `certificates` in k9s
+- Check `all+` namespace then search for `ingress`
+- Describe simple-bank-ingress
 
 &nbsp;
 
