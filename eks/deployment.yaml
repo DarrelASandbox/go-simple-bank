@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simplebank-api-deployment
+  name: simple-bank-api-deployment
   labels:
-    app: simplebank-api
+    app: simple-bank-api
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: simplebank-api
+      app: simple-bank-api
   template:
     metadata:
       labels:
-        app: simplebank-api
+        app: simple-bank-api
     spec:
       containers:
-        - name: simplebank-api
+        - name: simple-bank-api
           image: AWS ECR Image URI # Use latest tag
           imagePullPolicy: Always
           ports:

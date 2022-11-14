@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS simplebank;
+CREATE DATABASE IF NOT EXISTS simple_bank;
 
-USE simplebank;
+USE simple_bank;
 
 CREATE TABLE "users" (
   "username" varchar PRIMARY KEY,

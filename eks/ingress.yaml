@@ -21,7 +21,7 @@ spec:
             path: '/'
             backend:
               service:
-                name: simplebank-api-service
+                name: simple_bank-api-service
                 port:
                   number: 80
     tls:

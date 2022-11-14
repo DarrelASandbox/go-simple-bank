@@ -29,7 +29,7 @@
 
 - Backend Master Class [Golang + Postgres + Kubernetes + gRPC]
 - Learn everything about backend web development: Golang, Postgres, Gin, gRPC, Docker, Kubernetes, AWS, GitHub Actions
-- [Original Repo - simplebank](https://github.com/techschool/simplebank)
+- [Original Repo - simple_bank](https://github.com/techschool/simple_bank)
 - [techschool](https://github.com/techschool)
 
 &nbsp;
@@ -59,7 +59,7 @@
 
 ```sh
 # Login using root
-psql simplebank -U root
+psql simple_bank -U root
 # Check connection info
 \conninfo
 
@@ -282,8 +282,8 @@ migrate create -ext sql -dir db/migration -seq add_users
   - Download from release and place it in root folder (`wait-for.sh`)
 
 ```sh
-docker build -t simplebank:latest .
-docker run --name simplebank -p 4000:4000 -e GIN_MODE=release simplebank:latest
+docker build -t simple_bank:latest .
+docker run --name simple_bank -p 4000:4000 -e GIN_MODE=release simple_bank:latest
 docker compose up
 
 # Make script executable
@@ -311,7 +311,7 @@ chmod +x wait-for.sh
    1. **Group name:** deployment
    2. **Filter policies:** elastic container registry
    3. Check AmazonEC2ContainerRegistryFullAccess -> Create group -> Next -> Review
-6. GitHub simplebank repo Settings -> Secrets -> New repository secret
+6. GitHub simple_bank repo Settings -> Secrets -> New repository secret
    1. Refer to the code snippets below
    2. **Name:** `AWS_ACCESS_KEY_ID`
    3. **Value:** `AWS Access Key ID`
@@ -344,7 +344,7 @@ chmod +x wait-for.sh
 1. AWS RDS -> Create database
 2. **Choose a database creation method:** Standard create
 3. **Engine options:** PostgreSQL
-4. **DB instance identifier:** simplebank
+4. **DB instance identifier:** simple_bank
 5. **Master username:** root
 6. Check **Auto generate a password**
 7. **DB instance class:** db.t2.micro
@@ -355,7 +355,7 @@ chmod +x wait-for.sh
     1. Create new
     2. **New VPC security group name:** access-postgres-anywhere
 12. **Database authentication:** Password authentication
-13. **Initial database name:** simplebank
+13. **Initial database name:** simple_bank
 14. Create database
 15. View credential details
 16. Register new Server/Connection for PostgreSQL
@@ -363,7 +363,7 @@ chmod +x wait-for.sh
     2. **Host:** From AWS connection details endpoint _(See point 19)_
     3. **Username:** root
     4. **Password:** From AWS RDS credential details
-    5. **Database:** simplebank
+    5. **Database:** simple_bank
 17. Check VPC Security Groups from AWS RDS
 18. Via the Security group ID -> Edit inbound rules
     1. **Source:** Anywhere _(Unless ip is static)_
@@ -391,17 +391,17 @@ openssl rand -hex 64 | head -c 32
    3. **SERVER_ADDRESS:** 0.0.0.0:4000
    4. **TOKEN_SYMMETRIC_KEY:** _Generate a 32 characters string_
    5. **ACCESS_TOKEN_DURATION:** 15m
-3. Next -> **Secret name:** simplebank -> Next -> Next -> Store
+3. Next -> **Secret name:** simple_bank -> Next -> Next -> Store
 4. [Install AWS CLI](https://aws.amazon.com/cli/)
    1. `aws configure` _(Refer to IAM profile)_
    2. `ls -l ~/.aws`
    3. `cat ~/.aws/credentials`
    4. `aws secretsmanager help`
-   5. `aws secretsmanager get-secret-value --secret-id simplebank` _Might want to try with arn as well_
+   5. `aws secretsmanager get-secret-value --secret-id simple_bank` _Might want to try with arn as well_
    6. AWS IAM User groups -> Permissions -> Add permissions -> **Attach Policies:** SecretsManagerReadWrite
-   7. `aws secretsmanager get-secret-value --secret-id simplebank --query SecretString --output text`
+   7. `aws secretsmanager get-secret-value --secret-id simple_bank --query SecretString --output text`
 5. `brew install jq` (To output into json format)
-   1. `aws secretsmanager get-secret-value --secret-id simplebank --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > app.env`
+   1. `aws secretsmanager get-secret-value --secret-id simple_bank --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > app.env`
       1. [jq - String interpolation](<https://stedolan.github.io/jq/manual/#Stringinterpolation-(foo)>)
       2. [jq - Array/Object Value Iterator](https://stedolan.github.io/jq/manual/#Array/ObjectValueIterator:.[])
       3. [jq - Invoking jq (`--raw-output / -r`)](https://stedolan.github.io/jq/manual/#Invokingjq)
@@ -419,7 +419,7 @@ openssl rand -hex 64 | head -c 32
 ## AWS EKS
 
 1. AWS EKS -> clusters -> Create cluster
-   1. **Name:** simplebank
+   1. **Name:** simple_bank
    2. **Kubernetes version:** 1.20
    3. **Cluster Service Role:** AWSEKSClusterRole
       1. AWS IAM -> Create role -> `EKS - Cluster` use case -> Next (`AmazonEKSClusterPolicy`) -> Next
@@ -429,7 +429,7 @@ openssl rand -hex 64 | head -c 32
 4. **Amazon VPC CNI Version:** `v1.8.0-eksbuild. 1`
 5. Next -> Next -> Create -> Refresh later when cluster is created
 6. Add Node Group
-   1. **Name:** simplebank
+   1. **Name:** simple_bank
    2. **Node IAM Role:** AWSEKSNodeRole
       1. AWS IAM -> Create role -> `EC2` use case -> Next
       2. Pick `AmazonEKS_CNI_Policy` & `AmazonEKSWorkerNodePolicy` & `AmazonEC2ContainerRegistryReadOnly` -> Next
@@ -464,7 +464,7 @@ openssl rand -hex 64 | head -c 32
 5. Review policy
 6. **Name:** EKSFullAccess
 7. Create policy
-8. `aws eks update-kubeconfig --name simplebank --region us-east-1`
+8. `aws eks update-kubeconfig --name simple_bank --region us-east-1`
 9. `ls -l ~/.kube`
 10. **Switch between clusters:** `kubectl config use-context arn:aws:eks:ap-southeast-1:560476749134:cluster/dep-aws-eks`
 11. [How do I provide access to other IAM users and roles after cluster creation in Amazon EKS?](https://aws.amazon.com/premiumsupport/knowledge-center/amazon-eks-cluster-access/)
@@ -486,15 +486,15 @@ openssl rand -hex 64 | head -c 32
 
 1. [Kubernetes Documentation - Concepts - Workloads - Workload Resources - Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 2. `kubectl apply -f eks/deployment.yaml`
-3. AWS EKS -> Clusters -> Compute -> `simplebank` Node Group -> Autoscaling group name -> Edit group details
+3. AWS EKS -> Clusters -> Compute -> `simple_bank` Node Group -> Autoscaling group name -> Edit group details
    1. **Desired capacity:** 1
    2. Update -> Activity -> Refresh
    3. **The points below are for switching instance type:**
       1. [AWS EC2 - IP addresses per network interface per instance type: t3.micro](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html)
-      2. Edit -> Edit Node Group: simplebank page -> **Cannot change eni**
+      2. Edit -> Edit Node Group: simple_bank page -> **Cannot change eni**
       3. So we must **delete** node group
       4. Add Node Group
-      5. **Name:** simplebank
+      5. **Name:** simple_bank
       6. **Role name:** AWSEKSNodeRole
       7. Next
       8. **AMI type:** Amazon Linux 2 (AL2_x86_64)
