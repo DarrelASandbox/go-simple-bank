@@ -20,6 +20,7 @@
     <li><a href="#k8s-ingress">k8s Ingress</a></li>
     <li><a href="#k8s-cert-manager--lets-encrypt">k8s cert-manager & Let's Encrypt</a></li>
     <li><a href="#k8s-with-github-actions">k8s with GitHub Actions</a></li>
+    <li><a href="#dbdocsio">dbdocs.io</a></li>
   </ul>
 </details>
 
@@ -588,6 +589,18 @@ openssl rand -hex 64 | head -c 32
 
 - [GitHub Marketplace - Kubectl tool installer](https://github.com/marketplace/actions/kubectl-tool-installer)
   - Find latest version using this URL: `storage.googleapis.com/kubernetes-release/release/stable.txt`
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## dbdocs.io
+
+- [dbdocs.io](https://dbdocs.io/docs)
+  - Refer to `db.dbml`
+  - Login -> `dbdocs build doc/db.dbml`
 
 &nbsp;
 
