@@ -21,6 +21,7 @@
     <li><a href="#k8s-cert-manager--lets-encrypt">k8s cert-manager & Let's Encrypt</a></li>
     <li><a href="#k8s-with-github-actions">k8s with GitHub Actions</a></li>
     <li><a href="#dbdocsio">dbdocs.io</a></li>
+    <li><a href="#grpc">gRPC</a></li>
   </ul>
 </details>
 
@@ -601,6 +602,54 @@ openssl rand -hex 64 | head -c 32
 - [dbdocs.io](https://dbdocs.io/docs)
   - Refer to `db.dbml`
   - Login -> `dbdocs build doc/db.dbml`
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## gRPC
+
+- **Remote Procedure Call Framework**
+  - The client can execute a remote procedure on the server
+  - The remote interaction code is handled by gRPC
+  - The API & data structure code is automatically generated
+  - Support multiple programming languages
+- **How it works?**
+  1. **Define API & data structure**
+     - The RPC and its request/ response structure are defined using protobuf
+  2. **Generate gRPC stubs**
+     - Generate codes for the server and client in the language of your choice
+  3. **Implement the server**
+     - Implement the RPC handler on the server side
+  4. **Use the client**
+     - Use the generated client stubs to call the RPC on the serser
+- **Why GRPC?**
+  - **High performance:** HTTP/2: binary framing, multiplexing, header compression, bidirectional communication
+  - **Strong API contract:** Server & client share the same protobuf RPC definition with strongly typed data
+  - **Automatic code generation:** Codes that serialize/ deserialize data, or transfer data between client & server are automatically generated
+- **4 Types of GRPC**
+  1. Unary gRPC
+  2. Client streaming gRPC
+  3. Server streaming gRPC
+  4. Bidirectional streaming gRPC
+- **GRPC Gateway:** Serve both gRPC and HTTP requests at once
+  - A plugin of protobuf compiler
+  - Generate proxy codes from protobuf
+    - In-process translation: only for unary
+    - Separate proxy server: both unary and streaming
+  - Write code once, serve both gRPC and HTTP requests
+- [gRPC - Introduction to gRPC](https://grpc.io/docs/what-is-grpc/introduction/)
+- [gRPC - Docs - Languages - Go - Quick start](https://grpc.io/docs/languages/go/quickstart/)
+- `brew install protobuf`
+- `protoc --version`
+
+```json
+  "protoc": {
+    "options": ["--proto_path=protos/v3"]
+  }
+```
 
 &nbsp;
 
