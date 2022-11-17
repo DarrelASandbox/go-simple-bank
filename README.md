@@ -31,7 +31,7 @@
 
 - Backend Master Class [Golang + Postgres + Kubernetes + gRPC]
 - Learn everything about backend web development: Golang, Postgres, Gin, gRPC, Docker, Kubernetes, AWS, GitHub Actions
-- [Original Repo - simple_bank](https://github.com/techschool/simple_bank)
+- [Original Repo - simple_bank](https://github.com/techschool/simplebank)
 - [techschool](https://github.com/techschool)
 
 &nbsp;
