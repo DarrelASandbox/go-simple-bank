@@ -1,4 +1,4 @@
-package api_gin
+package api_rpc
 
 import (
 	"context"

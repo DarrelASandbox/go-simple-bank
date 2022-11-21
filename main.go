@@ -7,7 +7,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/DarrelASandbox/go-simple-bank/api_gin"
+	"github.com/DarrelASandbox/go-simple-bank/api_rpc"
 	"github.com/DarrelASandbox/go-simple-bank/db/util"
 	"github.com/DarrelASandbox/go-simple-bank/pb"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
@@ -51,7 +51,7 @@ func runGinServer(config util.Config, store db.Store) {
 }
 
 func runGrpcServer(config util.Config, store db.Store) {
-	server, err := api_gin.NewServer(config, store)
+	server, err := api_rpc.NewServer(config, store)
 	if err != nil {
 		log.Fatal("cannot create server:", err)
 	}
@@ -73,7 +73,7 @@ func runGrpcServer(config util.Config, store db.Store) {
 }
 
 func runGatewayServer(config util.Config, store db.Store) {
-	server, err := api_gin.NewServer(config, store)
+	server, err := api_rpc.NewServer(config, store)
 	if err != nil {
 		log.Fatal("cannot create server:", err)
 	}

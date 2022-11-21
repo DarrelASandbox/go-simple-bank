@@ -654,7 +654,7 @@ openssl rand -hex 64 | head -c 32
 ```
 
 - **`api` folder: REST api - HTTP request**
-- **`api_gin` folder: gRPC api - grpc message**
+- **`api_rpc` folder: gRPC api - grpc message**
 - [Why do we need to register reflection service on gRPC server](https://stackoverflow.com/questions/41424630/why-do-we-need-to-register-reflection-service-on-grpc-server)
 - [List of TCP and UDP port numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers)
 
