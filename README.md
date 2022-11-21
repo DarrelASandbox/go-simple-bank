@@ -634,12 +634,13 @@ openssl rand -hex 64 | head -c 32
   2. Client streaming gRPC
   3. Server streaming gRPC
   4. Bidirectional streaming gRPC
-- **GRPC Gateway:** Serve both gRPC and HTTP requests at once
+- [**GRPC Gateway:**](https://github.com/grpc-ecosystem/grpc-gateway) Serve both gRPC and HTTP requests at once
   - A plugin of protobuf compiler
   - Generate proxy codes from protobuf
     - In-process translation: only for unary
     - Separate proxy server: both unary and streaming
   - Write code once, serve both gRPC and HTTP requests
+  - `protoc-gen-grpc-gateway --help`
 - [gRPC - Introduction to gRPC](https://grpc.io/docs/what-is-grpc/introduction/)
 - [gRPC - Docs - Languages - Go - Quick start](https://grpc.io/docs/languages/go/quickstart/)
 - `brew install protobuf`
