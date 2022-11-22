@@ -21,7 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// https://developers.google.com/protocol-buffers/docs/proto3#assigning_field_numbers
 type LoginUserRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

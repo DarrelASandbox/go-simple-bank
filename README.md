@@ -686,3 +686,6 @@ ls -l dist
 cp -r dist/* ~/Projects/go-simple-bank/doc/swagger/
 # Change url in `swagger-initializer.js` file to `simple_bank.swagger.json`
 ```
+
+- [Go Standard Library - Embed](https://pkg.go.dev/embed) instead of [statik](https://github.com/rakyll/statik)
+  - Embed a directory of static files into your Go binary to be later served from an http.FileSystem

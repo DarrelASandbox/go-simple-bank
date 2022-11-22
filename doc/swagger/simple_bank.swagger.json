@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Simple Bank API",
-    "version": "1.0",
+    "version": "1.1",
     "contact": {
       "name": "DarrelA",
       "url": "https://github.com/darrela",
@@ -23,6 +23,8 @@
   "paths": {
     "/v1/create_user": {
       "post": {
+        "summary": "Create new user",
+        "description": "Use this API to create a new user",
         "operationId": "SimpleBank_CreateUser",
         "responses": {
           "200": {
@@ -55,6 +57,8 @@
     },
     "/v1/login_user": {
       "post": {
+        "summary": "Login user",
+        "description": "Use this API to login user and get access token \u0026 refresh token",
         "operationId": "SimpleBank_LoginUser",
         "responses": {
           "200": {
@@ -102,8 +106,7 @@
         "password": {
           "type": "string"
         }
-      },
-      "title": "https://developers.google.com/protocol-buffers/docs/proto3#assigning_field_numbers"
+      }
     },
     "pbCreateUserResponse": {
       "type": "object",
@@ -122,8 +125,7 @@
         "password": {
           "type": "string"
         }
-      },
-      "title": "https://developers.google.com/protocol-buffers/docs/proto3#assigning_field_numbers"
+      }
     },
     "pbLoginUserResponse": {
       "type": "object",
@@ -170,8 +172,7 @@
           "type": "string",
           "format": "date-time"
         }
-      },
-      "title": "https://developers.google.com/protocol-buffers/docs/proto3#assigning_field_numbers"
+      }
     },
     "protobufAny": {
       "type": "object",

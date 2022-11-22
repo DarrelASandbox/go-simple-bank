@@ -3,7 +3,6 @@ package pb;
 import "google/protobuf/timestamp.proto";
 option go_package = "github.com/DarrelASandbox/go-simple-bank/pb";
 
-// https://developers.google.com/protocol-buffers/docs/proto3#assigning_field_numbers
 message User {
   string username = 1;
   string full_name = 2;
