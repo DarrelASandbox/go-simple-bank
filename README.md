@@ -670,3 +670,13 @@ exit
 ---
 
 &nbsp;
+
+## Swagger
+
+- [Swagger](https://swagger.io/)
+
+```sh
+# From source `~/Downloads/grpc-gateway/protoc-gen-openapiv2/options`
+# Copy required files
+cp *.proto ~/Projects/go-simple-bank/proto/protoc-gen-openapiv2/options/
+```
