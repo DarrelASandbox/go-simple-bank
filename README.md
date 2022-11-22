@@ -674,9 +674,15 @@ exit
 ## Swagger
 
 - [Swagger](https://swagger.io/)
+- [Swagger UI](https://github.com/swagger-api/swagger-ui)
 
 ```sh
 # From source `~/Downloads/grpc-gateway/protoc-gen-openapiv2/options`
 # Copy required files
 cp *.proto ~/Projects/go-simple-bank/proto/protoc-gen-openapiv2/options/
+
+# From `~/Downloads/swagger-ui`
+ls -l dist
+cp -r dist/* ~/Projects/go-simple-bank/doc/swagger/
+# Change url in `swagger-initializer.js` file to `simple_bank.swagger.json`
 ```
