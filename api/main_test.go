@@ -6,7 +6,7 @@ import (
 	"time"
 
 	db "github.com/DarrelASandbox/go-simple-bank/db/sqlc"
-	"github.com/DarrelASandbox/go-simple-bank/db/util"
+	"github.com/DarrelASandbox/go-simple-bank/util"
 	"github.com/stretchr/testify/require"
 
 	"github.com/gin-gonic/gin"

@@ -4,7 +4,7 @@ import (
 	"context"
 
 	db "github.com/DarrelASandbox/go-simple-bank/db/sqlc"
-	"github.com/DarrelASandbox/go-simple-bank/db/util"
+	"github.com/DarrelASandbox/go-simple-bank/util"
 	"github.com/DarrelASandbox/go-simple-bank/pb"
 	"github.com/lib/pq"
 	"google.golang.org/grpc/codes"

@@ -20,7 +20,7 @@ import (
 	"github.com/golang/mock/gomock"
 
 	db "github.com/DarrelASandbox/go-simple-bank/db/sqlc"
-	"github.com/DarrelASandbox/go-simple-bank/db/util"
+	"github.com/DarrelASandbox/go-simple-bank/util"
 )
 
 func TestGetAccountAPI(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/DarrelASandbox/go-simple-bank/db/util"
+	"github.com/DarrelASandbox/go-simple-bank/util"
 
 	db "github.com/DarrelASandbox/go-simple-bank/db/sqlc"
 	"github.com/gin-gonic/gin"

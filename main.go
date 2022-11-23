@@ -8,8 +8,8 @@ import (
 	"net/http"
 
 	"github.com/DarrelASandbox/go-simple-bank/api_rpc"
-	"github.com/DarrelASandbox/go-simple-bank/db/util"
 	"github.com/DarrelASandbox/go-simple-bank/pb"
+	"github.com/DarrelASandbox/go-simple-bank/util"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
