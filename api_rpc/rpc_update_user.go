@@ -3,6 +3,7 @@ package api_rpc
 import (
 	"context"
 	"database/sql"
+	"time"
 
 	db "github.com/DarrelASandbox/go-simple-bank/db/sqlc"
 	"github.com/DarrelASandbox/go-simple-bank/pb"
@@ -23,10 +24,13 @@ func (server *Server) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest)
 		Username: req.GetUsername(),
 		FullName: sql.NullString{
 			String: req.GetFullName(),
-			Valid:  req.FullName != nil},
+			Valid:  req.FullName != nil,
+		},
+
 		Email: sql.NullString{
 			String: req.GetEmail(),
-			Valid:  req.Email != nil},
+			Valid:  req.Email != nil,
+		},
 	}
 
 	if req.Password != nil {
@@ -37,7 +41,13 @@ func (server *Server) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest)
 
 		arg.HashedPassword = sql.NullString{
 			String: hashedPassword,
-			Valid:  true}
+			Valid:  true,
+		}
+	}
+
+	arg.PasswordChangedAt = sql.NullTime{
+		Time:  time.Now(),
+		Valid: true,
 	}
 
 	user, err := server.store.UpdateUser(ctx, arg)
