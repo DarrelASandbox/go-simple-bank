@@ -689,3 +689,30 @@ cp -r dist/* ~/Projects/go-simple-bank/doc/swagger/
 
 - [Go Standard Library - Embed](https://pkg.go.dev/embed) instead of [statik](https://github.com/rakyll/statik)
   - Embed a directory of static files into your Go binary to be later served from an http.FileSystem
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## authorization
+
+- We can implement authorization logic using a gRPC interceptor but if we do that, it won't work for the HTTP gateway.
+- And we will have to implement a separate HTTP middleware as well.
+- Hence, we have implemented the logic inside the RPC handler method, it will work out of the box for both gRPC & HTTP gateway server.
+
+```js postman
+pm.test('Status code is 200', function () {
+  pm.response.to.have.status(200);
+});
+
+const jsonData = JSON.parse(responseBody);
+pm.collectionVariables.set('access_token', jsonData.access_token);
+```
+
+&nbsp;
+
+---
+
+&nbsp;
