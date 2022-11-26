@@ -716,3 +716,22 @@ pm.collectionVariables.set('access_token', jsonData.access_token);
 ---
 
 &nbsp;
+
+## logger
+
+- [zerolog](https://github.com/rs/zerolog)
+- What logs should be?
+  - gRPC method
+  - Request duration
+  - Response status code
+  - JSON structured
+  - Easily parsed and indexed like log management tools:
+    - Logstash
+    - fluentd
+    - Grafana Loki
+
+&nbsp;
+
+---
+
+&nbsp;
