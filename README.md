@@ -729,6 +729,10 @@ pm.collectionVariables.set('access_token', jsonData.access_token);
     - Logstash
     - fluentd
     - Grafana Loki
+- `pb.RegisterSimpleBankHandlerServer` function performs an in-process translation between HTTP and gRPC.
+- which means it will call the handler function of the gRPC server directly, without going through any gRPC interceptor.
+- So that's why the gRPC logger function doesn't get executed for HTTP requests
+- Hence we will use a separate HTTP logger middleware function
 
 &nbsp;
 

@@ -2,6 +2,7 @@ package api_rpc
 
 import (
 	"context"
+	"net/http"
 	"time"
 
 	"github.com/rs/zerolog/log"
@@ -39,4 +40,23 @@ func GrpcLogger(
 		Msg("received a gRPC request")
 
 	return result, err
+}
+
+func HttpLogger(handler http.Handler) http.Handler {
+	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+
+		startTime := time.Now()
+		handler.ServeHTTP(res, req)
+		duration := time.Since(startTime)
+
+		logger := log.Info()
+
+		logger.Str("protocol", "http").
+			Str("method", req.Method).
+			Str("path", req.RequestURI).
+			// Int("status_code", int(statusCode)).
+			// Str("status_text", statusCode.String()).
+			Dur("duration", duration).
+			Msg("received a HTTP request")
+	})
 }
